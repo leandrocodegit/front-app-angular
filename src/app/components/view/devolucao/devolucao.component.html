@@ -1,0 +1,85 @@
+<spa-top [setViewParceiro]="false"></spa-top>  
+    <div *ngIf="isLoad" class="d-flex justify-content-center" style="padding-top: 50%">
+        <mat-spinner></mat-spinner>
+    </div>
+<div class="container" *ngIf="!isLoad" style="padding-bottom: 180px">  
+        <p class="text-center text-secondary">Detalhes do pedido</p>  
+        <ul class="list-group">
+            <li class="list-group-item h5">
+                Nº
+                <span class="float-end">{{ pedido.registro.identificador}}</span>
+              </li>
+          <li class="list-group-item">
+            Criado
+            <span class="float-end">{{ pedido.dataPedido | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+          </li>
+          <li class="list-group-item">
+            Atualizado
+            <span class="float-end">{{ pedido.ultimaAtualizacao | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+          </li>
+          <li class="list-group-item">
+            Pagamento
+            <span class="float-end">{{this.tradutor.traduzirString(pedido.pagamento.payment_type_id)}}</span>
+          </li>
+          <li class="list-group-item">
+            Parcelas
+            <span class="float-end">{{pedido.pagamento.installments == 1 ? 'à vista' : 'x' +
+              pedido.pagamento.installments}}</span>
+          </li>
+          <li class="list-group-item">
+            Status
+            <span class="float-end">{{this.tradutor.traduzirString(pedido.status)}}</span>
+          </li>
+          <li class="list-group-item">
+            Desconto
+            <span class="float-end">{{pedido.desconto | moeda}}</span>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li class="list-group-item h5 text-primary">
+            Total
+            <span class="float-end">{{pedido.total | moeda}}</span>
+          </li>
+        </ul>
+        <br>
+        <p class="text-center text-secondary">Produtos do pedidos</p>
+        <ul *ngFor="let produto of pedido.produtos" class="list-group">
+          <li class="list-group-item">
+            <img class="img-fluid mx-auto d-block image"
+              src="http://localhost/produto/imagem/{{produto.qrcode.produto.imageThumbnail}}" style="width: 35px">
+          </li>
+          <li class="list-group-item">
+            Codigo
+            <span class="float-end">{{produto.qrcode.produto.codigo}}</span>
+          </li>
+          <li class="list-group-item">
+            Quantidade
+            <span class="float-end">{{produto.quantidade}}</span>
+          </li>
+          <li class="list-group-item">
+            Valor unitário
+            <span class="float-end">{{produto.qrcode.preco | moeda}}</span>
+          </li>
+          <li class="list-group-item">
+            Total
+            <span class="float-end">{{produto.qrcode.preco * produto.quantidade | moeda}}</span>
+          </li>
+        </ul>
+        <br>
+        <p class="text-center text-secondary">Endereço de retirada</p>
+        <ul class="list-group">
+          <li class="list-group-item">
+            {{pedido.usuario.nome}}
+          </li>
+          <li class="list-group-item">
+            <span>{{pedido.usuario.endereco_principal | endereco}}</span>
+          </li>
+        </ul>
+        <br> 
+        <p class="text-center h5 text-danger">
+          Atenção!
+        </p>
+        <p class="text-center h5 text-warning">
+          A retirada será feita no endereço que foi entregue o pedido, então não precisa levar até a loja parceira.
+        </p>
+  <spa-footer [nameButton]="nameButton" [isChange]="true" [isViewCest]="false" [isView]="!isConfirmar" [isConfirmar]="isConfirmar" [color]="color" (eventConfirmarNao)="nao()" (eventConfirmarSim)="sim()" (eventVoltar)="voltar()" (eventFooter)="enviar()"></spa-footer>

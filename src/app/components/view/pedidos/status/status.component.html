@@ -1,0 +1,48 @@
+<main>     
+    <div  class="container p-4">
+        <div id="response" class="row justify-content-md-center">
+                <div *ngIf="isLoad" class="d-flex justify-content-center" style="padding-top: 20%">
+                    <mat-spinner></mat-spinner>
+                </div>
+            <div *ngIf="!isLoad" class="col-md-4 product-detail">
+                <div class="container" style="width: 90%;padding-top:5%">
+                    <p *ngIf="!isDanger" class="text-info text-center">
+                        <svg  xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                        </svg>
+                        </p>
+                        <p *ngIf="isDanger" class="text-danger text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-emoji-expressionless" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm5 0a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                              </svg>
+                    </p>                     
+                    <h3 [class.text-danger]="isDanger" class="text-info text-center" id="status-pagamento">{{mensagem}}</h3>
+                </div>
+                <div class="container" style="padding-top:5%">
+                    <div class="row mb-3">
+                        <label class="text-center">Pedido</label>
+                        <p [class.text-danger]="isDanger" class="fs-5 text-center">{{pedido.registro.identificador}}</p>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="text-center">Pagamento</label>
+                        <p [class.text-danger]="isDanger" class="fs-5 text-center">{{this.tradutor.traduzirString(pedido.pagamento.status)}}</p>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="text-center">Status</label>
+                        <p [class.text-danger]="isDanger" class="fs-5 text-center">{{this.tradutor.traduzirString(pedido.status)}}</p>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="text-center">Ultima atualização</label>
+                        <p [class.text-danger]="isDanger" class="fs-5 text-center">{{ pedido.ultimaAtualizacao | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+                    </div>
+                </div>
+            </div>
+            <p *ngIf="isDanger" class="text-center">
+                Prazo para lançamento de estorno é de até 48hs úteis.
+            </p>
+        </div>
+        <spa-footer [nameButton]="nameButton" [isViewIcons]="false" [color]="color" (eventFooter)="enviar()"></spa-footer>
+    </div> 
+</main>

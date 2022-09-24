@@ -1,0 +1,20 @@
+#canvas{
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    z-index: 1;
+    position: absolute;
+    }
+#icon{
+    position: absolute;
+    z-index: 2;
+    color: aqua;
+    width: 100%;
+    height: 80vh;
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: center!important;
+    align-items: center!important;
+    padding-top: 25%!important;
+    margin: auto!important;
+}

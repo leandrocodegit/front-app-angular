@@ -1,0 +1,27 @@
+ 
+ #itemName{  
+    font-size: 28px;  
+}
+
+.close{
+    visibility: hidden; 
+}
+ 
+a img{
+    width: 45px; 
+}
+.box-loja{ 
+    font-family: 'Play', sans-serif!important;  
+    letter-spacing: 2px;   
+    font-size: 28px; 
+    margin-top: 10px;
+}
+
+.row{
+    --bs-gutter-x: 0rem!important;
+}
+
+.box-top{
+    padding: 5px;
+}
+ 

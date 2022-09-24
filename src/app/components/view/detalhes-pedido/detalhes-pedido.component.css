@@ -1,0 +1,14 @@
+.box-detalhes{
+    font-family: 'Comfortaa', cursive;
+    padding-bottom: 40%;
+    padding-top: 10px;
+    font-size: 16px;
+}
+.box-detalhes h3{
+    padding: 15px; 
+}
+.box-detalhes b{
+    float: right;
+    color: #0066ff;
+}
+ 

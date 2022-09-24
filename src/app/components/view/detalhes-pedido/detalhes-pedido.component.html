@@ -1,0 +1,16 @@
+<div class="box-detalhes">  
+    <h3 class="text-center">Detalhes do pedido</h3>
+    <ul class="list-group">
+      <li class="list-group-item">Subtotal
+      <b class="price">{{pedido.subTotal  | moeda}}</b>
+      </li>
+      <li class="list-group-item">Itens
+        <b>{{pedido.itens}}</b>
+      <li *ngIf="pedido.desconto > 0" class="list-group-item">Descontos
+        <b class="price">{{pedido.desconto | moeda}}</b>
+        </li>
+        <li class="list-group-item">Total
+          <b class="price">{{pedido.total | moeda}}</b>
+          </li>
+    </ul> 
+</div> 

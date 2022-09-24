@@ -1,0 +1,27 @@
+<div class="box-top fixed-to">
+<div class="row"> 
+    <div [class.close]="!isViewParceiro" class="col-2"> 
+        <a   class="icon" data-bs-toggle="dropdown">
+            <img src="assets/img/store.png" class="mx-auto d-block">
+        </a>
+        <ul class="dropdown-menu">             
+            <li> <a class="dropdown-item font-padrao" style="color: #7f9bff;"><b>Loja, </b>{{parceiro.nome}}</a></li>
+            <li routerLink="/cadastro"><a class="dropdown-item font-">CNPJ: {{parceiro.cnpj}}</a></li>            
+        </ul> 
+    </div>
+    <div [class.close]="!isViewParceiro" class="col-8" style="margin-right: 0;">
+        <p class="text-secondary h5 text-center box-loja">{{parceiro.nome}}</p>  
+    </div>
+    <div class="col-2"> 
+        <a class="icon" data-bs-toggle="dropdown">
+            <img src="{{picture}}" class="rounded-circle mx-auto d-block" style="margin-right:0!important;">
+        </a>
+        <ul class="dropdown-menu">
+            <li *ngIf="!isVisible" routerLink="/login"><a class="dropdown-item font-padrao h4">Fazer login</a></li>
+            <li id="itemName" *ngIf="isVisible"><a class="dropdown-item font-padrao" style="color: #7f9bff;"><b>Olá,</b> {{nome}}</a></li> 
+            <li *ngIf="isVisible"><a class="dropdown-item font-padrao h4" routerLink="/pedido/list">Meus pedidos</a></li>
+            <li  ><a class="dropdown-item font-padrao h4" (click)="sair()">Sair</a></li>
+        </ul> 
+    </div>
+  </div>
+</div> 

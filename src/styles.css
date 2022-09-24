@@ -1,0 +1,50 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Oswald:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cambay&family=Mitr:wght@300&family=Play&family=Readex+Pro:wght@500&display=swap');
+.font-padrao{
+    font-family: 'Comfortaa', cursive;
+}
+
+.font-botao{
+    font-family: 'Readex Pro', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: black;
+}
+
+.readex{
+    font-family: 'Readex Pro', sans-serif; 
+}
+p, input{
+    font-family: 'Readex Pro', sans-serif!important; 
+    letter-spacing: 1.5px;
+}
+ label{
+    font-family: 'Cambay', sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 4px!important
+}
+
+.botao{
+    line-height: 1.9!important;
+    letter-spacing: 1px;
+    font-family: 'Play'!important;
+    height: 65px;
+}
+
+.button-person {
+    background-color: #45dde9;
+    color: white;
+    border: none;
+    border-radius: 50px !important;
+    height: 40px;
+    width: 220px;
+    font-size: 16px; 
+    font-family: monospace;   
+}
+
+.price{
+    letter-spacing: 1.5px;
+}

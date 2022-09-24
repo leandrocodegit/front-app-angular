@@ -1,0 +1,156 @@
+<spa-top></spa-top>
+<!-- Shopping Cart -->
+<section class="hidden">
+    <span id="product-description">Teste</span>
+    <input type="text" id="quantity" value="1" min="1" class="form-control" />
+    <input type="text" value="{{pedido.total}}" id="unit-price" />
+</section>
+<!-- Payment -->
+<div *ngIf="isLoad" class="d-flex justify-content-center" style="padding-top: 72%">
+    <mat-spinner ></mat-spinner>
+</div>
+<section [class.close]="isLoad" class="payment-form dark">
+    
+    <div id="div" class="container__payment">
+        <div class="payment-details">
+            <form id="form-checkout" class="was-validated">
+                <div class="hidden">
+                    <input value="lpoliveira.ti@gmail.com" required id="form-checkout__cardholderEmail"
+                        name="cardholderEmail" type="email" class="form-control" />
+                </div>
+                <div class="container" style="width: 95%; padding-top: 15px;">
+                    <div class="mb-3">
+                        <label for="form-checkout__cardholderName" class="form-label">CPF</label>
+                        <input value="08987782638" required pattern="[0-9]{1}[0-9][0-9]{9}"
+                            id="form-checkout__identificationNumber" name="docNumber" type="tel" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-checkout__cardholderName" class="form-label">Nome do
+                            titular</label>
+                        <input (keyup)="execute()" name="cardholderName" minlength="10" required type="text"
+                            class="form-control" id="form-checkout__cardholderName" placeholder="Igual do cartão" />
+                    </div>
+                    <div class="mb-3">
+                        <label id="token" for="form-checkout__cardNumber" class="form-label">Numero do
+                            cartão</label>
+                        <input id="form-checkout__cardNumber" type="hidden" />
+                        <input (keyup)="execute()" id="numeroCartao" pattern="[0-9\s]{13,19}" required
+                            name="numeroCartao" type="tel" class="form-control" />
+                        <div class="hidden">
+                            <label for="numeroCartao" generated="false" class="error"></label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-checkout__cardExpirationMonth" class="form-label">Validade</label>
+                        <div class="input-group">
+                            <span class="input-group-text" style="color:#bec1c5">Mês</span>
+                            <input (keyup)="execute()" id="form-checkout__cardExpirationMonth" pattern="(0[1-9]|1[012])"
+                                required name="cardExpirationMonth" type="tel" class="form-control is-valid"
+                                placeholder="00" />
+                            <div class="hidden">
+                                <label for="form-checkout__cardExpirationMonth" generated="false" class="error"></label>
+                            </div>
+                            <span class="input-group-text" style="color:#bec1c5">Ano</span>
+                            <input (keyup)="execute()" id="form-checkout__cardExpirationYear" pattern="[2-9][0-9]{1}"
+                                required name="cardExpirationYear" type="tel" class="form-control is-valid"
+                                placeholder="00" />
+                            <div class="hidden">
+                                <label for="form-checkout__cardExpirationYear" generated="false" class="error"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <div class="flex-fill">
+                                <label for="form-checkout__securityCode" class="form-label">Codigo de
+                                    segurança</label>
+                                <input (keyup)="execute()" id="form-checkout__securityCode" pattern="[0-9]{3}" required
+                                    name="securityCode" type="tel" class="form-control" placeholder="CVV"
+                                    style="width:170px">
+                            </div>
+                            <div class="flex-fill">
+                                <div style="float: right;">
+                                    <img id="bandeira" src="">
+                                </div>
+                            </div>
+                        </div>
+                        <input id="MPHiddenInputToken" name="MPHiddenInputToken" type="hidden">
+                    </div>
+
+                    <div id="issuerInput" class="form-group col-sm-12 hidden">
+                        <select id="form-checkout__issuer" name="issuer" required class="form-control"></select>
+                    </div>
+                    <label for="form-checkout__securityCode" class="form-label">Opções de parcelamento</label>
+                    <div class="form-group col-sm-12">
+                        <select (change)="execute()" [(ngModel)]="parcelas" id="form-checkout__installments" name="installments" type="text" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-12" style="padding-bottom:30px">
+                        <input type="hidden" id="amount" value="10.0" />
+                        <input type="hidden" id="description" value="Teste" />
+                        <p id="loading-message" style="color: #ff9e3a;padding: 15px;"></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Result -->
+<section class="shopping-cart white" style="padding-bottom: 85px;">
+    <div class="container container__result">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="items product info product-details">
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-4 product-detail">
+                            <div class="product-info">
+                                <div id="success-response">
+                                    <div class="container" style="width: 90%;padding-top:5%">
+                                        <p class="text-info text-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
+                                                fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                <path
+                                                    d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                                            </svg>
+                                        </p>
+
+                                        <h3 class="text-info text-center" id="status-pagamento"></h3>
+                                    </div>
+                                    <div class="container" style="padding-top:5%">
+                                        <div class="row mb-3">
+                                            <label class="text-center">Transação</label>
+                                            <p id="payment-id" class="fs-4 text-center">0</p>
+                                            <input id="transacao-id" type="hidden" class="fs-4 text-center" />
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="text-center">Detalhes</label>
+                                            <p id="payment-detail" class="fs-4 text-center">0</p>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="text-center">Status</label>
+                                            <p id="payment-status" class="fs-4 text-center">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- concluir -->
+        <div class="fixed-bottom">
+            <div class="d-grid gap-2">
+                <a th:href="@{/pay/confirm}" id="concluir" type="submit" class="btn text-white rounded-0 p-3"
+                    style="background:#0dcaf0">
+                    <span class="spinner"></span> Concluir
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<spa-footer [isView]="isValid" [isViewIcons]="!isLoad" [nameButton]="nameButton" [color]="color" (eventVoltar)="voltar()" (eventFooter)="registraPedido()" (eventSheet)="openSheet()">
+</spa-footer>

@@ -1,0 +1,58 @@
+<spa-top></spa-top>
+<div *ngIf="isEmpty"> 
+    <div class="container p-4">
+        <div class="container" style="color: #ffd9d9;padding-top:50%">
+            <p class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                  </svg>
+            </p>                     
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-3" style="padding-bottom: 180px">
+    <div *ngFor="let object of produtosPedido" class="row">
+        <div style="width:110px; padding:5px">
+            <img class="img-fluid mx-auto d-block image"
+                src="http://localhost/produto/imagem/{{object.qrcode.produto.imageThumbnail}}" width="90px" />
+        </div>
+        <div class="col font-monospace">
+            <span id="precoItem" class="fs-4 price">{{object.qrcode.preco | moeda }} x{{object.quantidade}}</span><br>
+            <span id="totalItem" class="fs-6 price" style="color:#69db6c">{{ object.qrcode.preco * object.quantidade |
+                moeda }}</span><br>
+            <span>{{object.qrcode.produto.descricao}}</span>
+        </div>
+        <div style="width:58px">
+            <div *ngIf="object.qrcode.produto.estoque.estoqueAtual > object.quantidade"
+                (click)="increment(object)" style="padding: 5px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor"
+                    class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+            </div>
+            <div *ngIf="object.qrcode.produto.estoque.estoqueAtual > 0" (click)="decrement(object)" style="padding: 5px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor"
+                    class="bi bi-dash-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                </svg>
+            </div>
+            <div (click)="remove(object)" style="padding: 5px;color: #ed9c9c;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor"
+                    class="bi bi-x-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </div>
+        </div>
+        <div *ngIf="(object.quantidade + 5) > object.qrcode.produto.estoque.estoqueAtual" class="text-white p-1"
+            style="font-size: 13px;background: #b288b5;">Estoque baixo ({{object.qrcode.produto.estoque.estoqueAtual < 0? 0 : object.qrcode.produto.estoque.estoqueAtual }})
+        </div>
+        <hr>
+    </div>
+</div>
+<spa-footer [nameButton]="nameButton" [isChange]="isChange" (eventVoltar)="voltar()" (eventFooter)="enviar()"></spa-footer>
