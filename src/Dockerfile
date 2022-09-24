@@ -1,3 +1,3 @@
 FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY front-vitrine /usr/share/nginx/html
+COPY src/nginx.conf /etc/nginx/nginx.conf
+COPY src/front-vitrine /usr/share/nginx/html
